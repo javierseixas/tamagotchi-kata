@@ -25,51 +25,6 @@ public class TestSteps {
         assertThat(tamagotchi, isA(Tamagotchi.class));
     }
 
-    @When("^I feed it$")
-    public void i_feed_it() throws Throwable {
-        this.tamagotchi.getsFeeded();
-    }
-
-    @Then("^it's hungriness is decreased$")
-    public void it_s_hungriness_is_decreased() throws Throwable {
-        assertThat(tamagotchi.hungriness(), is(40));
-    }
-
-    @Then("^it's fullness is increased$")
-    public void it_s_fullness_is_increased() throws Throwable {
-        assertThat(tamagotchi.fullness(), is(60));
-    }
-
-    @When("^I put it to bed$")
-    public void i_put_it_to_bed() throws Throwable {
-        tamagotchi.goesToBed();
-    }
-
-    @Then("^it's tiredness is decreased$")
-    public void it_s_tiredness_is_decreased() throws Throwable {
-        assertThat(tamagotchi.tiredness(), is(40));
-    }
-
-    @When("^time passes$")
-    public void time_passes() throws Throwable {
-        tamagotchi.timePasses();
-    }
-
-    @Then("^it's tiredness is increased$")
-    public void it_s_tiredness_is_increased() throws Throwable {
-        assertThat(tamagotchi.tiredness(), is(60));
-    }
-
-    @Then("^it's hungriness is increased$")
-    public void it_s_hungriness_is_increased() throws Throwable {
-        assertThat(tamagotchi.hungriness(), is(60));
-    }
-
-    @Then("^it's happiness is decreased$")
-    public void it_s_happiness_is_decreased() throws Throwable {
-        assertThat(tamagotchi.happiness(), is(40));
-    }
-
     @Given("^I have a Tamagotchi with state:$")
     public void i_have_a_Tamagotchi_with_state(DataTable tamagotchi) throws Throwable {
         Map<String, Integer> state = tamagotchi.asMap(String.class, Integer.class);
@@ -81,17 +36,32 @@ public class TestSteps {
         );
     }
 
-    @When("^it's ([a-z]+) is decreased to (\\d+)$")
+    @When("^I feed it$")
+    public void i_feed_it() throws Throwable {
+        this.tamagotchi.getsFeeded();
+    }
+
+    @When("^time passes$")
+    public void time_passes() throws Throwable {
+        tamagotchi.timePasses();
+    }
+
+    @When("^I put it to bed$")
+    public void i_put_it_to_bed() throws Throwable {
+        tamagotchi.goesToBed();
+    }
+
+    @Then("^it's ([a-z]+) is decreased to (\\d+)$")
     public void it_s_feeling_is_decreased_to(String feeling, int value) throws Throwable {
         a_feeling_has_changed(feeling, value);
     }
 
-    @When("^it's ([a-z]+) is increased to (\\d+)$")
+    @Then("^it's ([a-z]+) is increased to (\\d+)$")
     public void it_s_feeling_is_increased_to(String feeling, int value) throws Throwable {
         a_feeling_has_changed(feeling, value);
     }
 
-    @When("^it's ([a-z]+) remains (\\d+)$")
+    @Then("^it's ([a-z]+) remains (\\d+)$")
     public void it_s_feeling_remains(String feeling, int value) throws Throwable {
         a_feeling_has_changed(feeling, value);
     }
