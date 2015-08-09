@@ -10,12 +10,37 @@ public class Tamagotchi {
     private Integer tiredness = 50;
     private Integer happiness = 50;
 
-    public void feed() {
-        hungriness -= VARIATION;
-        fullness += VARIATION;
+    public Tamagotchi() {
+
     }
 
-    public void iPutItToBed() {
+    public Tamagotchi(Integer happiness, Integer hungriness, Integer tiredness, Integer fullness) {
+        this.happiness = happiness;
+        this.hungriness = hungriness;
+        this.tiredness = tiredness;
+        this.fullness = fullness;
+    }
+
+    public void getsFeeded() {
+        hungriness -= VARIATION;
+        fullness += VARIATION;
+
+        if (hungriness < 0) hungriness = 0;
+        if (fullness > 100) fullness = 100;
+    }
+
+    public void plays() {
+        if (tiredness >= 100) {
+            return;
+        }
+        happiness += VARIATION;
+        tiredness += VARIATION;
+    }
+
+    public void goesToBed() {
+        if (tiredness <= 0) {
+            return;
+        }
         tiredness -= VARIATION;
     }
 
@@ -39,5 +64,10 @@ public class Tamagotchi {
 
     public Integer happiness() {
         return happiness;
+    }
+
+    public void poops() {
+        if (fullness <= 0) return;
+        fullness -= VARIATION;
     }
 }
