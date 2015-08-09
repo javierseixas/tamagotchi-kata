@@ -5,6 +5,23 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 version = '1.0'
 
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'com.softwarecraftmanship.tamagotchi.steps', 'src/test/resources']
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }
